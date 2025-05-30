@@ -113,7 +113,7 @@ class VisionTransformer(nn.Module):
             Block(dim = embed_dim, num_heads = num_heads, p = p, mlp_ratio = mlp_ratio, qkv_bias = qkv_bias, attn_p = attn_p)
             for _ in range(num_layers)
         ])
-        self.norm = nn.LayerNomrm(normalized_shape=embed_dim, eps = 10**-6)
+        self.norm = nn.LayerNorm(normalized_shape=embed_dim, eps = 10**-6)
         self.head = nn.Linear(in_features = embed_dim, out_features =  num_classes)
 
     def forward(self, x):
