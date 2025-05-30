@@ -110,7 +110,7 @@ class VisionTransformer(nn.Module):
         self.pos_embedding = nn.Parameter(torch.zeros(1, 1 + self.patch_embedding.num_patches, embed_dim)) # shape : [1, 1 + num_patches, embed_dim]
         self.pos_drop = nn.Dropout(p = p)
         self.blocks = nn.ModuleList([
-            Block(self, dim = embed_dim, num_heads = num_heads, p = p, mlp_ratio = mlp_ratio, qkv_bias = qkv_bias, attn_p = attn_p)
+            Block(dim = embed_dim, num_heads = num_heads, p = p, mlp_ratio = mlp_ratio, qkv_bias = qkv_bias, attn_p = attn_p)
             for _ in range(num_layers)
         ])
         self.norm = nn.LayerNomrm(normalized_shape=embed_dim, eps = 10**-6)
