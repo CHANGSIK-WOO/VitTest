@@ -49,7 +49,7 @@ class MultiHeadAttention(nn.Module):
         attention_scores = self.attn_drop(attention_scores)
 
         weighted_avg = attention_scores @ v # (bs, num_heads, num_tokens + 1, head_dim)
-        weighted_avg = einops.rearrange(weighted_avg, "b n_h n_t h_d -> b n_t (n_h n_d)") # (bs, num_tokens + 1 , dim) equal to x.transpose(1, 2) -> x.flatten(2)
+        weighted_avg = einops.rearrange(weighted_avg, "b n_h n_t h_d -> b n_t (n_h h_d)") # (bs, num_tokens + 1 , dim) equal to x.transpose(1, 2) -> x.flatten(2)
 
         x = self.projection(weighted_avg)
         x= self.proj_drop(x)
