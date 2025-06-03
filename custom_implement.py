@@ -6,6 +6,7 @@ import einops
 
 class PatchEmbedding(nn.Module):
     def __init__(self, img_size : int, patch_size : int, in_channels : int, embed_dim : int = 768):
+        super().__init__()
         self.img_size = img_size
         self.patch_size = patch_size
         self.num_patch = (img_size // patch_size) ** 2
