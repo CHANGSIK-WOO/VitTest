@@ -16,19 +16,17 @@ class PatchEmbedding(nn.Module):
         # (bs, C, H, W) --> (bs, embed_dim, H', W')
         # (bs, 3, 256, 256) --> (bs, 768, 16, 16)
 
-
     def forward(self, x):
-        print(x.shape) # (bs, 3, 256, 256)
+        print(f"Input : {x.shape}") # (bs, 3, 256, 256)
         x = self.projection(x) 
-        print(x.shape) # (bs, 3, 256, 256) --> (bs, 768, 16, 16)
-        x = einops.rearrange(x, "b c h w -> b (h w) c") # (bs, 768, 16, 16) --> (bs, 256, 768)
+        print(f"After Projection : {x.shape}") # (bs, 3, 256, 256) --> (bs, 768, 16, 16)
+        x = x.flatten(2).tranpose(1, 2)
+        # x = einops.rearrange(x, "b c h w -> b (h w) c") # (bs, 768, 16, 16) --> (bs, 256, 768)
         return x
 
-
 x = torch.rand([32, 3, 256, 256])
-print(x.shape)
 bs, c, h, w = x.shape
 pe = PatchEmbedding(img_size = h, patch_size = 16, in_channels = c, embed_dim = 768)
 x = pe(x)
-print(x.shape)
+print(f"After Patch Embedding : {x.shape}")
 
