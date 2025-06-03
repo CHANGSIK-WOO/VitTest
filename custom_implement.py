@@ -20,7 +20,7 @@ class PatchEmbedding(nn.Module):
         print(f"Input : {x.shape}") # (bs, 3, 256, 256)
         x = self.projection(x) 
         print(f"After Projection : {x.shape}") # (bs, 3, 256, 256) --> (bs, 768, 16, 16)
-        x = x.flatten(2).tranpose(1, 2)
+        x = x.flatten(2).transpose(1, 2)
         # x = einops.rearrange(x, "b c h w -> b (h w) c") # (bs, 768, 16, 16) --> (bs, 256, 768)
         return x
 
