@@ -7,10 +7,10 @@ import einops
 class PatchEmbedding(nn.Module):
     def __init__(self, img_size : int, patch_size : int, in_channels : int, embed_dim : int = 768):
         super().__init__()
-        self.img_size = img_size # 256¡¿256
-        self.patch_size = patch_size # 16¡¿16
+        self.img_size = img_size # 256 * 256
+        self.patch_size = patch_size # 16 * 16
         self.embed_dim = embed_dim # 768
-        self.num_patch = (img_size // patch_size) ** 2 # 16
+        self.num_patch = (img_size // patch_size) ** 2 # 16 ** 2 = 256
         
         self.projection = nn.Conv2d(in_channels=in_channels, out_channels=embed_dim, kernel_size=patch_size, stride = patch_size) 
         # (bs, C, H, W) --> (bs, embed_dim, H', W')
