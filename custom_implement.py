@@ -16,7 +16,9 @@ class PatchEmbedding(nn.Module):
 
 
     def forward(self, x):
+        print(x)
         x = self.projection(x)
+        print(x)
         x = x.reshape(x.shape[0], -1, self.embed_dim) # (bs, embed_dim, H, W) --> (bs, (HW), embed_dim)
         return x
 
