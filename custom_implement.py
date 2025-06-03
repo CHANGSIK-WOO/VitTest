@@ -30,3 +30,7 @@ pe = PatchEmbedding(img_size = h, patch_size = 16, in_channels = c, embed_dim = 
 x = pe(x)
 print(f"After Patch Embedding : {x.shape}")
 
+
+class MultiHeadAttention(nn.Module):
+    def __init__(self, dim : int, num_heads : int = 12, qkv_bias : bool = True, attn_p : float = 0.0, proj_p : float = 0.0):
+
